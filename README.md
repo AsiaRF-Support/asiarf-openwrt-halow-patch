@@ -27,14 +27,17 @@
 5. In openwrt/asiarf-openwrt-halow-patch directory, execute the script.
 
 	```
-	cd openwrt/asiarf-openwrt-halow-patch; bash install-asiarf-ap7622.sh; cd ../
+	cd openwrt/asiarf-openwrt-halow-patch; bash install.sh <platform>; cd ../
 	```
+	Currently, available platform:
+		ap7622-wh1 - ap7622-wh1 with integrated mm610x chip.
+		ap7621-004 - ap7621-004-v3 with mm610x-cs1 card installed.
 
 6. The script will install and patch files, prepare the configuration,
    including executing morse_setup.sh.
 
 7. Run make to build the image. After building, you can get the firmware
-   in **bin/targets/mediatek/mt7622/** directory.
+   in **bin/targets/** directory.
 
 	```
 	make V=s -j$(($(nproc) + 1))
