@@ -5,14 +5,13 @@
    (commit hash = 39565282fdea7a8869c001e3db6ba0446574a027)
 
 	```
-	git clone https://github.com/MorseMicro/openwrt.git
-	cd openwrt/ ; git checkout 39565282fdea7a8869c001e3db6ba0446574a027 ; cd -
+	git clone -b 2.6.6 https://github.com/MorseMicro/openwrt.git
 	```
 
 3. Clone and copy this repository into openwrt directory.
 
 	```
- 	git clone https://github.com/AsiaRF-Support/asiarf-openwrt-halow-patch.git
+ 	git clone -b next https://github.com/AsiaRF-Support/asiarf-openwrt-halow-patch.git
 	cp -r asiarf-openwrt-halow-patch openwrt/
 	```
 
@@ -34,7 +33,7 @@
    | platform | description |
    | -------- | ----------- |
    | ap7622-wh1 | ap7622-wh1 with integrated mm610x chip |
-   | ap7621-004 | ap7621-004-v3 with mm610x-cs1 card installed |
+   | ap7621-004 | ap7621-004 with mm610x-cs1 card installed |
     ------------------------
 
 7. The script will install and patch files, prepare the configuration,
