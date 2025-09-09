@@ -1,0 +1,35 @@
+From b0ab7cf42ec7f155d022469868fc87607ef01b22 Mon Sep 17 00:00:00 2001
+From: Elwin Huang <s09289728096@gmail.com>
+Date: Tue, 9 Sep 2025 09:53:16 +0800
+Subject: [PATCH 1/2] ramips: Add target ap7621-004-v3
+
+---
+ target/linux/ramips/image/mt7621.mk | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/target/linux/ramips/image/mt7621.mk b/target/linux/ramips/image/mt7621.mk
+index 1a8df617b5..93f9e56f78 100644
+--- a/target/linux/ramips/image/mt7621.mk
++++ b/target/linux/ramips/image/mt7621.mk
+@@ -277,6 +277,18 @@ define Device/asiarf_ap7621-nv1
+ endef
+ TARGET_DEVICES += asiarf_ap7621-nv1
+ 
++define Device/asiarf_ap7621-004-v3
++  $(Device/dsa-migration)
++  $(Device/uimage-lzma-loader)
++  DEVICE_VENDOR := AsiaRF
++  DEVICE_MODEL := AP7621-004
++  DEVICE_VARIANT := v3
++  IMAGE_SIZE := 16000k
++  DEVICE_PACKAGES := kmod-mmc-mt7620 kmod-usb3 -uboot-envtools
++  SUPPORTED_DEVICES := asiarf,ap7621-004-v3
++endef
++TARGET_DEVICES += asiarf_ap7621-004-v3
++
+ define Device/asus_rp-ac56
+   $(Device/dsa-migration)
+   $(Device/uimage-lzma-loader)
+-- 
+2.25.1
+

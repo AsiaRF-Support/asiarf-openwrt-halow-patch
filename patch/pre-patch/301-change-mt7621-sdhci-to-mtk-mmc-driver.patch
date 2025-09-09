@@ -1,0 +1,119 @@
+From 10c503d26479f7ea6e34f331a32e3d409c83b050 Mon Sep 17 00:00:00 2001
+From: Elwin Huang <s09289728096@gmail.com>
+Date: Tue, 9 Sep 2025 09:55:55 +0800
+Subject: [PATCH 2/2] ramips: Using upstream mmc-mtk to replace sdhci driver.
+
+---
+ target/linux/ramips/dts/mt7621.dtsi    | 62 +++++++++++++++++++++++---
+ target/linux/ramips/mt7620/config-5.15 |  2 +
+ 2 files changed, 59 insertions(+), 5 deletions(-)
+
+diff --git a/target/linux/ramips/dts/mt7621.dtsi b/target/linux/ramips/dts/mt7621.dtsi
+index 3e076741a9..e3e4bc67fe 100644
+--- a/target/linux/ramips/dts/mt7621.dtsi
++++ b/target/linux/ramips/dts/mt7621.dtsi
+@@ -41,6 +41,38 @@
+ 		bootargs = "console=ttyS0,57600";
+ 	};
+ 
++	reg_vmmc: regulator-vmmc {
++		compatible = "regulator-fixed";
++		regulator-always-on;
++		regulator-max-microvolt = <3300000>;
++		regulator-min-microvolt = <3300000>;
++		regulator-name = "mmc_power";
++	};
++
++	reg_vqmmc: regulator-vqmmc {
++		compatible = "regulator-fixed";
++		regulator-always-on;
++		regulator-max-microvolt = <3300000>;
++		regulator-min-microvolt = <3300000>;
++		regulator-name = "mmc_io";
++	};
++
++	reg_vbus: regulator-vbus {
++		compatible = "regulator-fixed";
++		regulator-always-on;
++		regulator-max-microvolt = <5000000>;
++		regulator-min-microvolt = <5000000>;
++		regulator-name = "usb_power";
++	};
++
++	reg_vusb33: regulator-vusb33 {
++		compatible = "regulator-fixed";
++		regulator-always-on;
++		regulator-max-microvolt = <3300000>;
++		regulator-min-microvolt = <3300000>;
++		regulator-name = "usb_io";
++	};
++
+ 	sysclock: sysclock {
+ 		#clock-cells = <0>;
+ 		compatible = "fixed-clock";
+@@ -344,17 +376,34 @@
+ 		#clock-cells = <1>;
+ 	};
+ 
+-	sdhci: sdhci@1e130000 {
+-		status = "disabled";
+-
+-		compatible = "ralink,mt7620-sdhci";
++	sdhci: mmc@1e130000 {
++		compatible = "mediatek,mt7620-mmc", "ralink,mt7620-sdhci";
+ 		reg = <0x1e130000 0x4000>;
+ 
++		bus-width = <4>;
++		max-frequency = <50000000>;
++		cap-mmc-highspeed;
++		cap-sd-highspeed;
++		disable-wp;
++		no-1-8-v;
++
++		clocks = <&sysc MT7621_CLK_SHXC>, <&sysc MT7621_CLK_SHXC>;
++		clock-names = "source", "hclk";
++
+ 		interrupt-parent = <&gic>;
+ 		interrupts = <GIC_SHARED 20 IRQ_TYPE_LEVEL_HIGH>;
+ 
+-		pinctrl-names = "default";
++		pinctrl-names = "default", "state_uhs";
+ 		pinctrl-0 = <&sdhci_pins>;
++		pinctrl-1 = <&sdhci_pins>;
++
++		resets = <&rstctrl 30>; // #define MT7621_RST_SDXC	30
++		reset-names = "hrst";
++
++		vmmc-supply = <&reg_vmmc>;
++		vqmmc-supply = <&reg_vqmmc>;
++
++		status = "disabled";
+ 	};
+ 
+ 	xhci: xhci@1e1c0000 {
+@@ -372,6 +421,9 @@
+ 		interrupt-parent = <&gic>;
+ 		interrupts = <GIC_SHARED 22 IRQ_TYPE_LEVEL_HIGH>;
+ 
++		vbus-supply = <&reg_vbus>;
++		vusb33-supply = <&reg_vusb33>;
++
+ 		/*
+ 		 * Port 1 of both hubs is one usb slot and referenced here.
+ 		 * The binding doesn't allow to address individual hubs.
+diff --git a/target/linux/ramips/mt7620/config-5.15 b/target/linux/ramips/mt7620/config-5.15
+index fdca30fecb..fd0397ebfe 100644
+--- a/target/linux/ramips/mt7620/config-5.15
++++ b/target/linux/ramips/mt7620/config-5.15
+@@ -163,6 +163,8 @@ CONFIG_RALINK_WDT=y
+ CONFIG_RATIONAL=y
+ CONFIG_REGMAP=y
+ CONFIG_REGMAP_MMIO=y
++CONFIG_REGULATOR=y
++CONFIG_REGULATOR_FIXED_VOLTAGE=y
+ CONFIG_RESET_CONTROLLER=y
+ CONFIG_SERIAL_8250_RT288X=y
+ CONFIG_SERIAL_MCTRL_GPIO=y
+-- 
+2.25.1
+
