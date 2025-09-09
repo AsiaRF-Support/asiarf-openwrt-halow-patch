@@ -1,0 +1,24 @@
+--- a/feeds/morse/netifd-morse/etc/uci-defaults/99-bcf-defaults	2025-09-09 10:40:08.454262860 +0800
++++ b/feeds/morse/netifd-morse/etc/uci-defaults/99-bcf-defaults	2025-09-09 11:19:25.803781906 +0800
+@@ -30,7 +30,8 @@
+ 		morse,ekh04v4)
+ 			bcf=bcf_ekh04_v4.bin
+ 		;;
+-		asiarf,ap7622-wh1)
++		asiarf,ap7622-wh1 |\
++		asiarf,ap7621-004-v3)
+ 			bcf=bcf_mf10220.bin
+ 		;;
+ 	esac
+--- a/feeds/morse/netifd-morse/lib/wifi/morse.sh	2025-09-09 10:40:08.454262860 +0800
++++ b/feeds/morse/netifd-morse/lib/wifi/morse.sh	2025-09-09 11:20:33.157085342 +0800
+@@ -130,7 +130,8 @@
+ 			morse,ekh04v4)
+ 				bcf=bcf_ekh04_v4.bin
+ 			;;
+-			asiarf,ap7622-wh1)
++			asiarf,ap7622-wh1 |\
++			asiarf,ap7621-004-v3)
+ 				bcf=bcf_mf10220.bin
+ 			;;
+ 		esac
