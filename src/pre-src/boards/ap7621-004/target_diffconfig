@@ -1,0 +1,61 @@
+CONFIG_TARGET_ramips=y
+CONFIG_TARGET_ramips_mt7621=y
+CONFIG_TARGET_ramips_mt7621_DEVICE_asiarf_ap7621-004-v3=y
+CONFIG_MORSE_BCF_DEVICE_ID="mf10220"
+CONFIG_MORSE_SDIO_ALIGNMENT=8
+CONFIG_TARGET_ROOTFS_INITRAMFS=n
+CONFIG_VERSION_MANUFACTURER="AsiaRF"
+CONFIG_VERSION_MANUFACTURER_URL="https://asiarf.com/"
+CONFIG_VERSION_DIST="AP7621-004"
+CONFIG_VERSION_NUMBER="v2.6.6-v1.02"
+CONFIG_VERSION_CODE=""
+CONFIG_VERSION_HWREV="v3"
+CONFIG_VERSION_PRODUCT="ARFHL"
+
+# Disable morse function here.
+CONFIG_PACKAGE_smart_manager=n
+CONFIG_PACKAGE_luci-app-morseguide=n
+CONFIG_PACKAGE_dpp-key-recovery=n
+CONFIG_PACKAGE_prplmesh=n
+CONFIG_PACKAGE_arp-scan-database=n
+CONFIG_PACKAGE_arp-scan=n
+CONFIG_PACKAGE_luci-app-morseupgrade=n
+CONFIG_PACKAGE_morse-wavemon=n
+CONFIG_PACKAGE_picocom=n
+CONFIG_PACKAGE_tmux=n
+
+# Mesh
+CONFIG_PACKAGE_morse_mesh11sd=y
+
+# USB support
+CONFIG_PACKAGE_kmod-usb-net-cdc-subset=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-eem=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-mbim=y
+CONFIG_PACKAGE_kmod-usb-net-qmi-wwan=y
+CONFIG_PACKAGE_kmod-usb-net-rndis=y
+CONFIG_PACKAGE_kmod-usb-ohci=y
+CONFIG_PACKAGE_kmod-usb-ohci-pci=y
+CONFIG_PACKAGE_kmod-usb-serial-option=y
+CONFIG_PACKAGE_kmod-usb-uhci=y
+CONFIG_PACKAGE_kmod-usb-wdm=y
+CONFIG_PACKAGE_kmod-usb2=y
+CONFIG_PACKAGE_kmod-usb2-pci=y
+
+# Utils
+CONFIG_PACKAGE_luci-app-ttyd=y
+CONFIG_PACKAGE_gpiod-tools=y
+
+# Performance evaluation
+CONFIG_PACKAGE_luci-app-statistics=y
+CONFIG_PACKAGE_collectd-mod-conntrack=y
+CONFIG_PACKAGE_collectd-mod-ipstatistics=y
+CONFIG_PACKAGE_collectd-mod-ping=y
+CONFIG_IPERF_ENABLE_MULTICAST=y
+CONFIG_PACKAGE_iperf3=y
+CONFIG_PACKAGE_iperf=y
+CONFIG_PACKAGE_iptraf-ng=y
+CONFIG_PACKAGE_tcpdump=y
+
+# WiFi
+CONFIG_PACKAGE_kmod-mac80211-hwsim=n
+
