@@ -27,6 +27,7 @@ usage() {
     echo "Support platform:"
 	echo "	ap7622-wh1"
 	echo "	ap7621-004"
+	echo "	<empty> for initialize only."
     exit 1
 }
 
@@ -41,8 +42,11 @@ do_patch() {
 	apply_patch
 
 	cd $OPENWRT_DIR
-	./scripts/morse_setup.sh -i -b $PLATFORM
-
+	if [ -z $PLATFORM ];then
+		./scripts/morse_setup.sh -i
+	else
+		./scripts/morse_setup.sh -i -b $PLATFORM
+	fi
 	SRC_DIR="$ROOT_DIR/src/post-src"
 	PATCH_DIR="$ROOT_DIR/patch/post-patch"
 	check_dir_exist "$SRC_DIR"
@@ -60,7 +64,17 @@ ROOT_DIR="$PWD"
 OPENWRT_DIR="$PWD/.."
 PLATFORM=$1
 
-if [ -d $ROOT_DIR/src/pre-src/boards/$PLATFORM ];then
+if [ -z $PLATFORM ];then
+	echo "Platform is empty."
+	echo "Would you initialize but not set up any target? [y/N]"
+	read ANSWER
+	if [ "$ANSWER" = "y" ]; then
+		do_patch
+	else
+		echo "N"
+		usage
+	fi
+elif [ -d $ROOT_DIR/src/pre-src/boards/$PLATFORM ];then
 	do_patch
 else
 	usage

@@ -32,6 +32,7 @@
 	------------------------
    | platform | description |
    | -------- | ----------- |
+   | <empty>    | initialize only without setting up target platform |
    | ap7622-wh1 | ap7622-wh1 with integrated mm610x chip |
    | ap7621-004 | ap7621-004 with mm610x-cs1 card installed |
     ------------------------
