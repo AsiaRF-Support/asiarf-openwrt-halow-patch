@@ -1,0 +1,12 @@
+diff --git a/scripts/morse_setup.sh b/scripts/morse_setup.sh
+index dff82a2dcd..2952eb7e08 100755
+--- a/scripts/morse_setup.sh
++++ b/scripts/morse_setup.sh
+@@ -128,6 +128,7 @@ INITIALIZE=
+ EXTRAS=
+ EXT_TOOLCHAIN=
+ GIT_SRC_OVERRIDES=( )
++MODE=""
+ while getopts ":l:s:b:x:g:ie:Emh" OPT; do
+     case "${OPT}" in
+         b)
