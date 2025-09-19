@@ -28,7 +28,7 @@
 &gpio {
 	gpio-line-names = "",
 		"", "", "", "", "",
-		"MM_RESET", "MM_WAKE", "MM_BUSY"; // GPIO 6, GPIO 7, GPIO 8
+		"MM_BUSY", "MM_WAKE", "MM_RESET"; // GPIO 6, GPIO 7, GPIO 8
 
 };
 
@@ -40,9 +40,9 @@
 
 	mm6108_sdio: mm6108_sdio@0 {
 		compatible = "morse,mm610x";
-		reset-gpios = <&gpio 6 0>; //MM_RESET PIN from (GPIO 41)
-		power-gpios = <&gpio 7 0>, //MM_WAKE PIN from (GPIO 40)
-					<&gpio 8 0>;  //MM_ASYNC_WAKEUP(to MM_GPIO_0) from (GPIO 1)
+		reset-gpios = <&gpio 8 0>; //MM_RESET PIN
+		power-gpios = <&gpio 7 0>, //MM_WAKE PIN
+					<&gpio 6 0>;  //MM_BUSY PIN
 		status = "okay";
 		reg = <2>;
 		bus-width = <4>;
