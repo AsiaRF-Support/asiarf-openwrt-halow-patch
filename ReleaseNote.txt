@@ -1,3 +1,7 @@
+v1.05
+	Fix EU/JP bcf file for RX path issue
+
+=============================================================
 v1.04
 	Bump Morse Micro SDK version to 2.9.3
 	Add platform support Raspberry Pi 4 (+MM610X-H06 HAT)
