@@ -8,7 +8,7 @@ diff --git a/feeds/morse/essentials/netifd-morse/lib/wifi/morse.sh b/feeds/morse
 +				asiarf,ap7622-wh1|\
 +				asiarf,ap7621-004-v3|\
 +				asiarf,mm610x-h06-spi-and-sdio)
-+					bcf=arfhl_d1164_bcf_mf10220_au_v1.bin
++					bcf=arfhl_d1164_bcf_mf10220_au_v3.bin
 +				;;
  				*)
  					if [[ $path  = *usb* ]]; then
